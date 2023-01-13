@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Infinite.MVC.Day1.Models.Product>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Products</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <table class="table table-c table-hover">
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Product Name
+                </th>
+            </tr>
+            @foreach (var prd in Model)
+            {
+                <tr>
+                    <td>@prd.Id</td>
+                    <td>@prd.ProductName</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

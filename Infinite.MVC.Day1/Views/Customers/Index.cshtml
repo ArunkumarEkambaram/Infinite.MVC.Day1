@@ -1,0 +1,27 @@
+﻿@*Following code is used to create object of Customer class named "Model"*@
+@model List<Infinite.MVC.Day1.Models.Customer> 
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Customers</h2>
+<hr />
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Mobile No</th>
+    </tr>    
+
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>@c.Id</td>
+            <td>@c.Name</td>
+            <td>@c.MobileNo</td>
+        </tr>
+    }
+</table>
