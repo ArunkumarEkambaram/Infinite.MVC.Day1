@@ -31,26 +31,26 @@ namespace Infinite.MVC.Day1.Controllers
         }
         
         //CUstomers/MyOrders/1001
-        public ActionResult MyOrders(int id)
-        {
-            Product p = new Product();
-            //MyOrderDetailsViewModel vm = new MyOrderDetailsViewModel
-            //{
-            //    CustomerName = new Customer().GetCustomers().FirstOrDefault(c => c.Id == id).Name,
-            //    Products = new Product().GetProducts()
-            //    //Products = p.GetProducts()
-            //};
+        //public ActionResult MyOrders(int id)
+        //{
+        //    Product p = new Product();
+        //    //MyOrderDetailsViewModel vm = new MyOrderDetailsViewModel
+        //    //{
+        //    //    CustomerName = new Customer().GetCustomers().FirstOrDefault(c => c.Id == id).Name,
+        //    //    Products = new Product().GetProducts()
+        //    //    //Products = p.GetProducts()
+        //    //};
 
-            MyOrderDetailsViewModel vm = new MyOrderDetailsViewModel();
-            vm.CustomerName = new Customer().GetCustomers().FirstOrDefault(c => c.Id == id)?.Name;
-            if (vm.CustomerName == null)
-            {
-                return HttpNotFound("Customer Id doesn't exists");
-            }
-            vm.Products = new Product().GetProducts();
+        //    MyOrderDetailsViewModel vm = new MyOrderDetailsViewModel();
+        //    vm.CustomerName = new Customer().GetCustomers().FirstOrDefault(c => c.Id == id)?.Name;
+        //    if (vm.CustomerName == null)
+        //    {
+        //        return HttpNotFound("Customer Id doesn't exists");
+        //    }
+        //    vm.Products = new Product().GetProducts();
 
-            return View(vm);
-        }
+        //    return View(vm);
+        //}
 
     }
 }

@@ -13,6 +13,13 @@
             <li class="list-group-item"><b>Product Name :</b>@Model.ProductName</li>
             <li class="list-group-item"><b>Price :</b>@Model.Price</li>
             <li class="list-group-item"><b>Quantity :</b>@Model.Quantity</li>
+            <li class="list-group-item"><b>Category Id :</b>@Model.CategoryId</li>
+            <li class="list-group-item"><b>Category Id :</b>@Model.Category.CategoryName</li>
         </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        @Html.ActionLink("Back to Index", "Index", "Products")
     </div>
 </div>

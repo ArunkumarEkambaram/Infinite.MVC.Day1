@@ -1,26 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infinite.MVC.Day1.Models
 {
     public class Product
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Product Name cannot be blank")]
+        [Display(Name = "Product Name")]
+        [Column(TypeName = "varchar")]
+        [StringLength(50)]
         public string ProductName { get; set; }
+
+        [Required]
+        [Display(Name = "Product Price")]
+        [Range(0.0, 100000.0, ErrorMessage = "Price should be between 0 and 100000")]
         public double Price { get; set; }
+
+        [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Quantity should be greater than zero")]
         public int Quantity { get; set; }
 
-        public List<Product> GetProducts()
-        {
-            return new List<Product>
-            {
-                new Product{Id=1, ProductName="Wall Clock", Price=899.89, Quantity=120},
-                new Product{Id=2, ProductName="Table Fan", Price=2599.5, Quantity=20},
-                new Product{Id=3, ProductName="Toys", Price=250, Quantity=100},
-                new Product{Id=4, ProductName="Speaker", Price=12599, Quantity=80},
-            };
-        }
+        //Navigation Properties
+        public Category Category { get; set; }//This is not a column
+
+        //Foreign Key       
+        public int CategoryId { get; set; }
+
+        //[NotMapped]
+        //public List<Category> Categories { get; set; }
     }
 }

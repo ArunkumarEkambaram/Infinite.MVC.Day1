@@ -1,9 +1,10 @@
-﻿@model IEnumerable<Infinite.MVC.Day1.Models.Product>
+﻿@model List<Infinite.MVC.Day1.Models.Product>
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>List of Products</h2>
+@Html.ActionLink("Add New", "Create", "Products", null, new {@class="btn btn-info"})
 
 <div class="row">
     <div class="col-md-4">
@@ -20,7 +21,7 @@
             {
                 <tr>
                     <td>@prd.Id</td>
-                    <td>@prd.ProductName</td>
+                    <td>@Html.ActionLink(prd.ProductName, "Details", "Products", new { id = prd.Id }, null)</td>
                 </tr>
             }
         </table>
