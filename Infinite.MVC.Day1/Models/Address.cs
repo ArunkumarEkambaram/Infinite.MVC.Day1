@@ -32,6 +32,8 @@ namespace Infinite.MVC.Day1.Models
         [StringLength(50)]
         public string City { get; set; }
 
+        public string State { get; set; }
+
         [Required]
         [StringLength(6)]
         public string Pincode { get; set; }

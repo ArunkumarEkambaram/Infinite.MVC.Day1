@@ -7,13 +7,13 @@ namespace Infinite.MVC.Day1.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class CreateBirthDateOnCustomers : IMigrationMetadata
+    public sealed partial class InitialModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateBirthDateOnCustomers));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "202301180906564_CreateBirthDateOnCustomers"; }
+            get { return "202301181449194_InitialModel"; }
         }
         
         string IMigrationMetadata.Source

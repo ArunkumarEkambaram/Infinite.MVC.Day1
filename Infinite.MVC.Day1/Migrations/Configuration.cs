@@ -1,5 +1,6 @@
 ﻿namespace Infinite.MVC.Day1.Migrations
 {
+    using Infinite.MVC.Day1.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -18,6 +19,7 @@
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
+            //Database.SetInitializer(new EComDBInitializer());
         }
     }
 }

@@ -7,6 +7,7 @@ using Infinite.MVC.Day1.Models;
 
 namespace Infinite.MVC.Day1.Controllers
 {
+   // [Authorize]
     [RoutePrefix("Customers")]
     public class CustomersController : Controller
     {
@@ -17,14 +18,14 @@ namespace Infinite.MVC.Day1.Controllers
             _context = new ApplicationDbContext();
         }
 
-        // GET: Customers/Index
+        [Authorize(Roles ="Admin, Executive")]
         public ViewResult Index()
         {
             var customers = _context.Customers.ToList();
             return View(customers);
         }
 
-        //Customers/Details/1
+        [Authorize(Roles = "Admin, Executive")]
         public ActionResult Details(int id)
         {
             var customer = _context.Customers.FirstOrDefault(c => c.Id == id);
@@ -35,12 +36,14 @@ namespace Infinite.MVC.Day1.Controllers
             return HttpNotFound();
         }
 
+        [Authorize(Roles = "Customer")]
         [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Customer")]
         [HttpPost]
         public ActionResult Create(Customer customer)
         {
@@ -53,6 +56,7 @@ namespace Infinite.MVC.Day1.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Customer")]
         [HttpGet]
         public ActionResult CreateAddress(int? customerId)
         {

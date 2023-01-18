@@ -52,10 +52,19 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=11.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.11.4.0\lib\netstandard2.0\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -127,58 +136,25 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202301170540080_InitialModel_CreateProduct.cs" />
-    <Compile Include="Migrations\202301170540080_InitialModel_CreateProduct.designer.cs">
-      <DependentUpon>202301170540080_InitialModel_CreateProduct.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202301170657371_CreateCustomer.cs" />
-    <Compile Include="Migrations\202301170657371_CreateCustomer.designer.cs">
-      <DependentUpon>202301170657371_CreateCustomer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202301170922077_AlterColumnProductName.cs" />
-    <Compile Include="Migrations\202301170922077_AlterColumnProductName.designer.cs">
-      <DependentUpon>202301170922077_AlterColumnProductName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202301171006295_AlterProductName_Varchar50.cs" />
-    <Compile Include="Migrations\202301171006295_AlterProductName_Varchar50.designer.cs">
-      <DependentUpon>202301171006295_AlterProductName_Varchar50.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202301171136420_CreateTableCategory.cs" />
-    <Compile Include="Migrations\202301171136420_CreateTableCategory.designer.cs">
-      <DependentUpon>202301171136420_CreateTableCategory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202301171145446_ApplyForeignKeyOnProducts.cs" />
-    <Compile Include="Migrations\202301171145446_ApplyForeignKeyOnProducts.designer.cs">
-      <DependentUpon>202301171145446_ApplyForeignKeyOnProducts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202301180410452_createaddresstable.cs" />
-    <Compile Include="Migrations\202301180410452_createaddresstable.designer.cs">
-      <DependentUpon>202301180410452_createaddresstable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202301180524523_AddColumnDescriptionOnProduct.cs" />
-    <Compile Include="Migrations\202301180524523_AddColumnDescriptionOnProduct.designer.cs">
-      <DependentUpon>202301180524523_AddColumnDescriptionOnProduct.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202301180906564_CreateBirthDateOnCustomers.cs" />
-    <Compile Include="Migrations\202301180906564_CreateBirthDateOnCustomers.designer.cs">
-      <DependentUpon>202301180906564_CreateBirthDateOnCustomers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202301180947231_ModifyCustomers.cs" />
-    <Compile Include="Migrations\202301180947231_ModifyCustomers.designer.cs">
-      <DependentUpon>202301180947231_ModifyCustomers.cs</DependentUpon>
+    <Compile Include="Migrations\202301181449194_InitialModel.cs" />
+    <Compile Include="Migrations\202301181449194_InitialModel.designer.cs">
+      <DependentUpon>202301181449194_InitialModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\UserRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -242,6 +218,9 @@
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Accounts\Register.cshtml" />
+    <Content Include="Views\Accounts\Login.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -274,35 +253,8 @@
     <Content Include="Scripts\jquery-3.6.3.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202301170540080_InitialModel_CreateProduct.resx">
-      <DependentUpon>202301170540080_InitialModel_CreateProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202301170657371_CreateCustomer.resx">
-      <DependentUpon>202301170657371_CreateCustomer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202301170922077_AlterColumnProductName.resx">
-      <DependentUpon>202301170922077_AlterColumnProductName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202301171006295_AlterProductName_Varchar50.resx">
-      <DependentUpon>202301171006295_AlterProductName_Varchar50.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202301171136420_CreateTableCategory.resx">
-      <DependentUpon>202301171136420_CreateTableCategory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202301171145446_ApplyForeignKeyOnProducts.resx">
-      <DependentUpon>202301171145446_ApplyForeignKeyOnProducts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202301180410452_createaddresstable.resx">
-      <DependentUpon>202301180410452_createaddresstable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202301180524523_AddColumnDescriptionOnProduct.resx">
-      <DependentUpon>202301180524523_AddColumnDescriptionOnProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202301180906564_CreateBirthDateOnCustomers.resx">
-      <DependentUpon>202301180906564_CreateBirthDateOnCustomers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202301180947231_ModifyCustomers.resx">
-      <DependentUpon>202301180947231_ModifyCustomers.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202301181449194_InitialModel.resx">
+      <DependentUpon>202301181449194_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

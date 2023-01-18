@@ -9,6 +9,7 @@ using System.Data.Entity.Migrations;
 
 namespace Infinite.MVC.Day1.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context = null;
