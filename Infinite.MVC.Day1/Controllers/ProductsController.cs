@@ -91,5 +91,18 @@ namespace Infinite.MVC.Day1.Controllers
             ViewBag.Categories = categories;
             return View(product);
         }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var productInDb = _context.Products.FirstOrDefault(p => p.Id == id);
+            if (productInDb != null)
+            {
+                _context.Products.Remove(productInDb);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }
