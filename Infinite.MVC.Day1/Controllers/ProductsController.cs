@@ -46,6 +46,7 @@ namespace Infinite.MVC.Day1.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Product product)
         {
             if (ModelState.IsValid)
@@ -73,6 +74,7 @@ namespace Infinite.MVC.Day1.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(Product product)
         {
             if (product != null)
@@ -93,6 +95,7 @@ namespace Infinite.MVC.Day1.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             var productInDb = _context.Products.FirstOrDefault(p => p.Id == id);

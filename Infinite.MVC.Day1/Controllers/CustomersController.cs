@@ -35,5 +35,32 @@ namespace Infinite.MVC.Day1.Controllers
             return HttpNotFound();
         }
 
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Customer customer)
+        {
+            if (customer != null)
+            {
+                _context.Customers.Add(customer);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult CreateAddress(int? customerId)
+        {
+            if (customerId.HasValue)
+            {
+
+            }
+            return View();
+        }
     }
 }

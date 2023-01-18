@@ -8,6 +8,8 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+
     <div class="mb-2">
         @Html.LabelFor(p => p.ProductName, new { @class = "form-label" })
         @Html.TextBoxFor(p => p.ProductName, new { @class = "form-control", @disabled = "disabled" })
