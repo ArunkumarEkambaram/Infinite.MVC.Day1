@@ -26,6 +26,8 @@ namespace Infinite.MVC.Day1.Models
         //Navigation Properties
         public Category Category { get; set; }//This is not a column
 
+        public string Description { get; set; }
+
         //Foreign Key       
         public int CategoryId { get; set; }
 

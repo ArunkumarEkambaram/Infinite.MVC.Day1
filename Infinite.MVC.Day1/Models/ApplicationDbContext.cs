@@ -19,5 +19,7 @@ namespace Infinite.MVC.Day1.Models
         public DbSet<Customer> Customers { get; set; }
 
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Address> Addresses { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace Infinite.MVC.Day1.Controllers
 {
@@ -28,7 +29,7 @@ namespace Infinite.MVC.Day1.Controllers
 
         //GET: Products/Details/1
         public ActionResult Details(int id)
-        {           
+        {
             var product = _context.Products.Include(p => p.Category).FirstOrDefault(p => p.Id == id);
             if (product != null)
             {
@@ -41,10 +42,6 @@ namespace Infinite.MVC.Day1.Controllers
         {
             var categories = _context.Categories.ToList();
             ViewBag.Categories = categories;
-            //Product p = new Product
-            //{
-            //    Categories = categories
-            //};
             return View();
         }
 
@@ -57,7 +54,42 @@ namespace Infinite.MVC.Day1.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
+            var categories = _context.Categories.ToList();
+            ViewBag.Categories = categories;
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+            if (product != null)
+            {
+                var categories = _context.Categories.ToList();
+                ViewBag.Categories = categories;
+                return View(product);
+            }
+            return HttpNotFound("Product Id doesn't exists");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Product product)
+        {
+            if (product != null)
+            {
+                var productInDb = _context.Products.Find(product.Id);
+                if (productInDb != null)
+                {
+                    productInDb.Price = product.Price;
+                    productInDb.Quantity = product.Quantity;
+                    //_context.Products.AddOrUpdate(productInDb);
+                    _context.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+            var categories = _context.Categories.ToList();
+            ViewBag.Categories = categories;
+            return View(product);
         }
     }
 }
